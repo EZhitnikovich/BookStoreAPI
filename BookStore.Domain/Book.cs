@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Domain;
 
-internal class Book : Entity
+public class Book : Entity
 {
     public Guid CategoryId { get; set; }
     public string Name { get; set; }

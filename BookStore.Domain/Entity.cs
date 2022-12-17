@@ -1,6 +1,6 @@
 ﻿namespace BookStore.Domain;
 
-internal class Entity
+public class Entity
 {
     public Guid Id { get; set; }
     public DateTime CreationDate { get; set; }
