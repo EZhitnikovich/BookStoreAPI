@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Interfaces
 {
-    internal interface IBookStoreDbContext
+    public interface IBookStoreDbContext
     {
         DbSet<Book> Books { get; set; }
         DbSet<Category> Categories { get; set; }
