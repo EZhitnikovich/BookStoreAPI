@@ -5,7 +5,7 @@ using BookStore.Persistence.EntityTypeConfigurations;
 
 namespace BookStore.Persistence
 {
-    internal class BookStoreDbContext : DbContext, IBookStoreDbContext
+    public class BookStoreDbContext : DbContext, IBookStoreDbContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
