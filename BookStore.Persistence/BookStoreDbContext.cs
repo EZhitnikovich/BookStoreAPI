@@ -19,6 +19,17 @@ namespace BookStore.Persistence
             modelBuilder.ApplyConfiguration(new BookConfiguration());
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new RatingConfiguration());
+
+            modelBuilder.Entity<Book>()
+                .HasOne(b => b.Category)
+                .WithMany(c => c.Books)
+                .HasForeignKey(k => k.CategoryId);
+
+            modelBuilder.Entity<Rating>()
+                .HasOne(r => r.Book)
+                .WithMany(b => b.Ratings)
+                .HasForeignKey(k => k.BookId);
+
             base.OnModelCreating(modelBuilder);
         }
     }
