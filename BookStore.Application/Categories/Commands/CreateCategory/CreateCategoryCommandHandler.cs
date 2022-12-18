@@ -2,7 +2,7 @@
 using BookStore.Domain;
 using MediatR;
 
-namespace BookStore.Application.Categories.Commands.CreateCommand
+namespace BookStore.Application.Categories.Commands.CreateCategory
 {
     internal class CreateCategoryCommandHandler
         : IRequestHandler<CreateCategoryCommand, Guid>
