@@ -19,7 +19,7 @@ namespace BookStore.Application.Ratings.Commands.DeleteRating
         {
             var entity = await context.Ratings.FindAsync(new object[] { request.Id }, cancellationToken);
 
-            if (entity == null)
+            if (entity == null || entity.UserId != request.UserId)
             {
                 throw new NotFoundException(nameof(Rating), request.Id);
             }
