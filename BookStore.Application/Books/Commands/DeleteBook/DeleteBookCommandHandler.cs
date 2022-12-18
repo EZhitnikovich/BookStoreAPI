@@ -8,7 +8,7 @@ namespace BookStore.Application.Books.Commands.DeleteBook
     internal class DeleteBookCommandHandler
         : IRequestHandler<DeleteBookCommand>
     {
-        public IBookStoreDbContext context { get; set; }
+        private readonly IBookStoreDbContext context;
 
         public DeleteBookCommandHandler(IBookStoreDbContext context)
         {
