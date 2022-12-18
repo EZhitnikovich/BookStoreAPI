@@ -10,7 +10,7 @@ namespace BookStore.Persistence.EntityTypeConfigurations
         {
             builder.HasKey(x => x.Id);
             builder.HasIndex(x => x.Id).IsUnique();
-            builder.Property(x => x.Name).HasMaxLength(100);
+            builder.Property(x => x.Title).HasMaxLength(100);
             builder.Property(x => x.Description).HasMaxLength(250);
         }
     }
