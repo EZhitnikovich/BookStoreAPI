@@ -1,0 +1,19 @@
+﻿using AutoMapper;
+using System.Reflection;
+
+namespace BookStore.Application.Common.Mapping
+{
+    internal class AssemblyMappingProfile: Profile
+    {
+        public AssemblyMappingProfile(Assembly assembly)
+            => ApplyMappingFromAssembly(assembly);
+
+        private void ApplyMappingFromAssembly(Assembly assembly)
+        {
+            var types = assembly.GetExportedTypes()
+                .Where(type => type.GetInterfaces()
+                .Any(i => i.IsGenericType &&
+                i.GetGenericTypeDefinition() == typeof(IMapWith<>)));
+        }
+    }
+}
