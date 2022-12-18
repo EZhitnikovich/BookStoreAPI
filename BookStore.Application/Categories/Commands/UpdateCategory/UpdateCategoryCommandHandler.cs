@@ -2,6 +2,7 @@
 using BookStore.Application.Interfaces;
 using BookStore.Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Categories.Commands.UpdateCategory
 {
@@ -17,7 +18,8 @@ namespace BookStore.Application.Categories.Commands.UpdateCategory
 
         public async Task<Unit> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
         {
-            var entity = await context.Categories.FindAsync(new object[] { request.Id }, cancellationToken);
+            var entity = await context.Categories
+                .FirstOrDefaultAsync(categ => categ.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {

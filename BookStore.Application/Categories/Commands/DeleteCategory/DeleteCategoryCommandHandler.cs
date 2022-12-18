@@ -2,6 +2,7 @@
 using BookStore.Application.Interfaces;
 using BookStore.Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Categories.Commands.DeleteCategory
 {
@@ -17,7 +18,8 @@ namespace BookStore.Application.Categories.Commands.DeleteCategory
 
         public async Task<Unit> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
         {
-            var entity = await context.Categories.FindAsync(new object[] { request.Id }, cancellationToken);
+            var entity = await context.Categories
+                .FirstOrDefaultAsync(categ => categ.Id == request.Id, cancellationToken);
 
             if (entity == null)
             {

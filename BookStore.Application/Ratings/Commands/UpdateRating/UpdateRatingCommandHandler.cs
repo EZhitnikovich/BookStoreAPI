@@ -2,6 +2,7 @@
 using BookStore.Application.Interfaces;
 using BookStore.Domain;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Ratings.Commands.UpdateRating
 {
@@ -17,7 +18,8 @@ namespace BookStore.Application.Ratings.Commands.UpdateRating
 
         public async Task<Unit> Handle(UpdateRatingCommand request, CancellationToken cancellationToken)
         {
-            var entity = await context.Ratings.FindAsync(new object[] { request.Id }, cancellationToken);
+            var entity = await context.Ratings.
+                FirstOrDefaultAsync(rating => rating.Id == request.Id, cancellationToken);
 
             if (entity == null || entity.UserId != request.UserId)
             {
