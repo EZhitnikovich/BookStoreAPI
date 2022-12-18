@@ -6,25 +6,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Books.Queries.GetAllBookList
 {
-    internal class GetBookListAllQueryHandler
-        : IRequestHandler<GetBookListAllQuery, BookListAllViewModel>
+    internal class GetAllBookListQueryHandler
+        : IRequestHandler<GetAllBookListQuery, AllBookListViewModel>
     {
         private readonly IBookStoreDbContext context;
         private readonly IMapper mapper;
 
-        public GetBookListAllQueryHandler(IBookStoreDbContext context, IMapper mapper)
+        public GetAllBookListQueryHandler(IBookStoreDbContext context, IMapper mapper)
         {
             this.context = context;
             this.mapper = mapper;
         }
 
-        public async Task<BookListAllViewModel> Handle(GetBookListAllQuery request, CancellationToken cancellationToken)
+        public async Task<AllBookListViewModel> Handle(GetAllBookListQuery request, CancellationToken cancellationToken)
         {
             var booksQuery = await context.Books
-                .ProjectTo<BookAllLookupDto>(mapper.ConfigurationProvider)
+                .ProjectTo<AllBookLookupDto>(mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
 
-            return new BookListAllViewModel { Books = booksQuery };
+            return new AllBookListViewModel { Books = booksQuery };
         }
     }
 }

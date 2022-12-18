@@ -4,7 +4,7 @@ using BookStore.Domain;
 
 namespace BookStore.Application.Books.Queries.GetAllBookList
 {
-    internal class BookLookupDto: IMapWith<Book>
+    internal class AllBookLookupDto: IMapWith<Book>
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -14,7 +14,7 @@ namespace BookStore.Application.Books.Queries.GetAllBookList
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Book, BookLookupDto>()
+            profile.CreateMap<Book, AllBookLookupDto>()
                 .ForMember(bookDto => bookDto.Title,
                     opt => opt.MapFrom(book => book.Title))
                 .ForMember(bookDto => bookDto.Description,
