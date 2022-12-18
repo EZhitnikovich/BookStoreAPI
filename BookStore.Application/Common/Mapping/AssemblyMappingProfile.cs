@@ -12,7 +12,7 @@ namespace BookStore.Application.Common.Mapping
         {
             var types = assembly.GetExportedTypes()
                 .Where(type => type.GetInterfaces()
-                    .Any(i => i.IsGenericType &&
+                .Any(i => i.IsGenericType &&
                     i.GetGenericTypeDefinition() == typeof(IMapWith<>)))
                 .ToList();
 
