@@ -4,7 +4,7 @@ using BookStore.Domain;
 
 namespace BookStore.Application.Books.Queries.GetBookList
 {
-    internal class BookLookupDto: IMapWith<Book>
+    public class BookLookupDto: IMapWith<Book>
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

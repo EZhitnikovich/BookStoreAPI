@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Ratings.Commands.UpdateRating
 {
-    internal class UpdateRatingCommandHandler
+    public class UpdateRatingCommandHandler
         : IRequestHandler<UpdateRatingCommand>
     {
         private readonly IBookStoreDbContext context;

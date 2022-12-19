@@ -2,7 +2,7 @@
 
 namespace BookStore.Application.Ratings.Commands.CreateRating
 {
-    internal class CreateRatingCommand : IRequest<Guid>
+    public class CreateRatingCommand : IRequest<Guid>
     {
         public Guid UserID { get; set; }
         public Guid BookId { get; set; }

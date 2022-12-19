@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Ratings.Commands.DeleteRating
 {
-    internal class DeleteRatingCommandHandler
+    public class DeleteRatingCommandHandler
         : IRequestHandler<DeleteRatingCommand>
     {
         private readonly IBookStoreDbContext context;

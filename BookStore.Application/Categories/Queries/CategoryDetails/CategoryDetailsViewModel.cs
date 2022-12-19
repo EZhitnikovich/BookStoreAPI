@@ -4,7 +4,7 @@ using BookStore.Domain;
 
 namespace BookStore.Application.Categories.Queries.CategoryDetails
 {
-    internal class CategoryDetailsViewModel : IMapWith<Category>
+    public class CategoryDetailsViewModel : IMapWith<Category>
     {
         public string Title { get; set; }
         public string Description { get; set; }

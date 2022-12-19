@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Ratings.Queries.RatingDetails
 {
-    internal class GetRatingDetailsByBookAndUserQueryHandler
+    public class GetRatingDetailsByBookAndUserQueryHandler
         : IRequestHandler<GetRatingDetailsByBookAndUserQuery,
             RatingDetailsByBookAndUserViewModel>
     {

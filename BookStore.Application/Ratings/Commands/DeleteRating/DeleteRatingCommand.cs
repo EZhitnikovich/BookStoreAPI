@@ -2,7 +2,7 @@
 
 namespace BookStore.Application.Ratings.Commands.DeleteRating
 {
-    internal class DeleteRatingCommand : IRequest
+    public class DeleteRatingCommand : IRequest
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

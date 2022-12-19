@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Books.Commands.UpdateBook
 {
-    internal class UpdateBookCommandHandler
+    public class UpdateBookCommandHandler
         : IRequestHandler<UpdateBookCommand>
     {
         private readonly IBookStoreDbContext context;

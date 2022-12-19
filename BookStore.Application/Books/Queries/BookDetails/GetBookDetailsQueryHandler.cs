@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Books.Queries.BookDetails
 {
-    internal class GetBookDetailsQueryHandler
+    public class GetBookDetailsQueryHandler
         : IRequestHandler<GetBookDetailsQuery, BookDetailsViewModel>
     {
         private readonly IBookStoreDbContext context;

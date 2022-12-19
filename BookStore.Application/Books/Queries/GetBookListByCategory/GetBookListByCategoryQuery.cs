@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.Application.Books.Queries.GetBookListByCategory
 {
-    internal class GetBookListByCategoryQuery: IRequest<BookListByCategoryViewModel>
+    public class GetBookListByCategoryQuery: IRequest<BookListByCategoryViewModel>
     {
         public Guid CategoryId { get; set; }
     }

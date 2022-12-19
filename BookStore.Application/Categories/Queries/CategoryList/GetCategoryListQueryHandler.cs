@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Categories.Queries.CategoryList
 {
-    internal class GetCategoryListQueryHandler
+    public class GetCategoryListQueryHandler
         : IRequestHandler<GetCategoryListQuery, CategoryListViewModel>
     {
         private readonly IBookStoreDbContext context;

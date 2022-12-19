@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BookStore.Application.Ratings.Commands.CreateRating
 {
-    internal class CreateRatingCommandHandler
+    public class CreateRatingCommandHandler
         : IRequestHandler<CreateRatingCommand, Guid>
     {
         private readonly IBookStoreDbContext context;

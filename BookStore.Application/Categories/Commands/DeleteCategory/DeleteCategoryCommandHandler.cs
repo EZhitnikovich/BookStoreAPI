@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Categories.Commands.DeleteCategory
 {
-    internal class DeleteCategoryCommandHandler
+    public class DeleteCategoryCommandHandler
         : IRequestHandler<DeleteCategoryCommand>
     {
         private readonly IBookStoreDbContext context;

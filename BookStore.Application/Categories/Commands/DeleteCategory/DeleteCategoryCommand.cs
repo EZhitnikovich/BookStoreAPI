@@ -2,7 +2,7 @@
 
 namespace BookStore.Application.Categories.Commands.DeleteCategory
 {
-    internal class DeleteCategoryCommand : IRequest
+    public class DeleteCategoryCommand : IRequest
     {
         public Guid Id { get; set; }
     }

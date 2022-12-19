@@ -2,7 +2,7 @@
 
 namespace BookStore.Application.Books.Queries.GetBookList
 {
-    internal class GetBookListQuery: IRequest<BookListViewModel>
+    public class GetBookListQuery: IRequest<BookListViewModel>
     {
 
     }

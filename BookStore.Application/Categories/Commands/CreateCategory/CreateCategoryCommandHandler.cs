@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BookStore.Application.Categories.Commands.CreateCategory
 {
-    internal class CreateCategoryCommandHandler
+    public class CreateCategoryCommandHandler
         : IRequestHandler<CreateCategoryCommand, Guid>
     {
         private readonly IBookStoreDbContext context;

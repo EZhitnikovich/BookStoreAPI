@@ -4,7 +4,7 @@ using BookStore.Domain;
 
 namespace BookStore.Application.Categories.Queries.CategoryList
 {
-    internal class CategoryLookupDto: IMapWith<Category>
+    public class CategoryLookupDto: IMapWith<Category>
     {
         public Guid Id { get; set; }
         public string Title { get; set; }

@@ -2,7 +2,7 @@
 
 namespace BookStore.Application.Books.Commands.CreateBook
 {
-    internal class CreateBookCommand : IRequest<Guid>
+    public class CreateBookCommand : IRequest<Guid>
     {
         public Guid CategoryId { get; set; }
         public string Title { get; set; }

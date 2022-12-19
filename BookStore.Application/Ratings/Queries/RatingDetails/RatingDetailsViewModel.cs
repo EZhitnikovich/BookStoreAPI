@@ -4,7 +4,7 @@ using BookStore.Domain;
 
 namespace BookStore.Application.Ratings.Queries.RatingDetails
 {
-    internal class RatingDetailsViewModel: IMapWith<Rating>
+    public class RatingDetailsViewModel: IMapWith<Rating>
     {
         public int Value { get; set; }
         public Guid UserId { get; set; }

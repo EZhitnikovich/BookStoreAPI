@@ -4,7 +4,7 @@ using MediatR;
 
 namespace BookStore.Application.Books.Commands.CreateBook
 {
-    internal class CreateBookCommandHandler
+    public class CreateBookCommandHandler
         : IRequestHandler<CreateBookCommand, Guid>
     {
         private readonly IBookStoreDbContext context;

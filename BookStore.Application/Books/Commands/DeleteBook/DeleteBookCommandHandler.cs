@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Application.Books.Commands.DeleteBook
 {
-    internal class DeleteBookCommandHandler
+    public class DeleteBookCommandHandler
         : IRequestHandler<DeleteBookCommand>
     {
         private readonly IBookStoreDbContext context;
