@@ -2,10 +2,12 @@
 using BookStore.Application.Interfaces;
 using BookStore.Domain;
 using BookStore.Persistence.EntityTypeConfigurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookStore.Persistence
 {
-    public class BookStoreDbContext : DbContext, IBookStoreDbContext
+    public class BookStoreDbContext : IdentityDbContext<IdentityUser>, IBookStoreDbContext
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Category> Categories { get; set; }
