@@ -29,11 +29,11 @@ namespace BookStore.WebApi.Controllers
         }
 
         [HttpGet("{categoryId}")]
-        public async Task<ActionResult<BookListByCategoryViewModel>> GetAll(Guid id)
+        public async Task<ActionResult<BookListByCategoryViewModel>> GetAll(Guid categoryId)
         {
             var query = new GetBookListByCategoryQuery
             {
-                CategoryId = id
+                CategoryId = categoryId
             };
             var vm = await Mediator.Send(query);
             return Ok(vm);
