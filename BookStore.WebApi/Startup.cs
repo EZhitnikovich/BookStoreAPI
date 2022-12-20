@@ -2,11 +2,13 @@
 using BookStore.Application.Common.Mapping;
 using BookStore.Application.Interfaces;
 using BookStore.Persistence;
+using BookStore.WebApi.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
+using System.Text;
 
 namespace BookStore.WebApi
 {
@@ -34,15 +36,6 @@ namespace BookStore.WebApi
                 .AddEntityFrameworkStores<BookStoreDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(o =>
-            {
-                o.Password.RequireDigit = false;
-                o.Password.RequireLowercase = false;
-                o.Password.RequireUppercase = false;
-                o.Password.RequireNonAlphanumeric= false;
-                o.Password.RequiredLength = 6;
-            });
-
             services.AddControllers();
 
             services.AddCors(opt =>
@@ -55,17 +48,52 @@ namespace BookStore.WebApi
                 });
             });
 
-            services.AddSwaggerGen(o =>
+            var jwtSettings = new JwtSettings();
+            Configuration.Bind(nameof(jwtSettings), jwtSettings);
+            services.AddSingleton(jwtSettings);
+
+            services.AddAuthentication(x =>
             {
-                o.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
-                    In = ParameterLocation.Cookie,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                        Encoding.ASCII.GetBytes(jwtSettings.Secret)),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    RequireExpirationTime = false,
+                    ValidateLifetime = true
+                };
+            });
+
+            services.AddSwaggerGen(x =>
+            {
+                x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme.",
                     Name = "Authorization",
-                    Type = SecuritySchemeType.OAuth2
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
                 });
 
-                o.OperationFilter<SecurityRequirementsOperationFilter>();
+                x.AddSecurityRequirement(new OpenApiSecurityRequirement{
+                    {
+                        new OpenApiSecurityScheme{
+                            Reference = new OpenApiReference{
+                                Id = "Bearer",
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },new List<string>()
+                    }
+                });
             });
         }
 

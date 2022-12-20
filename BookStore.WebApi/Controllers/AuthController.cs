@@ -20,6 +20,7 @@ namespace BookStore.WebApi.Controllers
         public async Task<IActionResult> Register([FromBody] UserDto userDto)
         {
             var user = await userManager.FindByEmailAsync(userDto.Email);
+
             if (user != null)
             {
                 return Conflict(nameof(user));
@@ -33,14 +34,12 @@ namespace BookStore.WebApi.Controllers
 
             var res = await userManager.CreateAsync(user, userDto.Password);
 
-            if(res.Succeeded)
+            if(!res.Succeeded)
             {
-                return Ok();
+                return BadRequest(res);
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return Ok(res);
         }
     }
 }
