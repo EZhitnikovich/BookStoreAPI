@@ -31,7 +31,7 @@ namespace BookStore.WebApi.Controllers
         public async Task<ActionResult<Guid>> Create([FromBody] CreateRatingDto createRatingDto)
         {
             var command = mapper.Map<CreateRatingCommand>(createRatingDto);
-            command.UserId = Guid.Parse((await userManager.FindByEmailAsync(User.Identity.Name)).Id); //TODO fix
+            command.UserId = UserId;
             var ratingId = await Mediator.Send(command);
             return Ok(ratingId);
         }
@@ -41,7 +41,7 @@ namespace BookStore.WebApi.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateRatingDto updateRatingDto)
         {
             var command = mapper.Map<UpdateRatingCommand>(updateRatingDto);
-            command.UserId = Guid.Parse((await userManager.FindByEmailAsync(User.Identity.Name)).Id); //TODO fix
+            command.UserId = UserId;
             await Mediator.Send(command);
             return NoContent();
         }

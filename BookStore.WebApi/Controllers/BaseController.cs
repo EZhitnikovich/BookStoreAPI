@@ -12,5 +12,8 @@ namespace BookStore.WebApi.Controllers
         private IMediator mediator;
         protected IMediator Mediator =>
             mediator ??= HttpContext.RequestServices.GetService<IMediator>();
+
+        internal Guid UserId => !User.Identity.IsAuthenticated
+            ? Guid.Empty : Guid.Parse(User.FindFirst("id")?.Value);
     }
 }
