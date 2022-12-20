@@ -1,6 +1,6 @@
 ﻿namespace BookStore.WebApi.Options
 {
-    internal class JwtSettings
+    public class JwtSettings
     {
         public string Secret { get; set; }
     }
