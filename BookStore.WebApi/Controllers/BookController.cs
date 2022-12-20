@@ -4,13 +4,14 @@ using BookStore.Application.Books.Commands.DeleteBook;
 using BookStore.Application.Books.Commands.UpdateBook;
 using BookStore.Application.Books.Queries.BookDetails;
 using BookStore.Application.Books.Queries.GetBookList;
+using BookStore.Application.Books.Queries.GetBookListByCategory;
 using BookStore.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class BookController: BaseController
+    public class BookController : BaseController
     {
         private readonly IMapper mapper;
 
@@ -27,7 +28,18 @@ namespace BookStore.WebApi.Controllers
             return Ok(vm);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{categoryId}")]
+        public async Task<ActionResult<BookListByCategoryViewModel>> GetAll(Guid id)
+        {
+            var query = new GetBookListByCategoryQuery
+            {
+                CategoryId = id
+            };
+            var vm = await Mediator.Send(query);
+            return Ok(vm);
+        }
+
+        [HttpGet("details/{id}")]
         public async Task<ActionResult<BookDetailsViewModel>> Get(Guid id)
         {
             var query = new GetBookDetailsQuery

@@ -36,6 +36,8 @@ namespace BookStore.WebApi
                     policy.AllowAnyOrigin();
                 });
             });
+
+            services.AddSwaggerGen();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,6 +46,9 @@ namespace BookStore.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseRouting();
             app.UseHttpsRedirection();
