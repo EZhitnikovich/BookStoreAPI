@@ -4,7 +4,7 @@ using BookStore.Application.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookStore.Application.Books.Queries.GetBookListByCategory
+namespace BookStore.Application.Books.Queries.GetBookList
 {
     public class GetBookListByCategoryQueryHandler
         : IRequestHandler<GetBookListByCategoryQuery, BookListByCategoryViewModel>
