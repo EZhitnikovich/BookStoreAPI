@@ -13,8 +13,6 @@ namespace BookStore.Application.Books.Queries.BookDetails
         public Guid CategoryId { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime? EditDate { get; set; }
-        public int RatingsCount { get; set; }
-        public double AverageRating { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -32,11 +30,7 @@ namespace BookStore.Application.Books.Queries.BookDetails
                 .ForMember(bookVm => bookVm.EditDate,
                     opt => opt.MapFrom(book => book.EditDate))
                 .ForMember(bookVm => bookVm.Id,
-                    opt => opt.MapFrom(book => book.Id))
-                .ForMember(bookVm => bookVm.RatingsCount,
-                    opt => opt.MapFrom(book => book.Ratings.Count()))
-                .ForMember(bookVm => bookVm.AverageRating,
-                    opt => opt.MapFrom(book => book.Ratings.Average(x=> x.Value)));
+                    opt => opt.MapFrom(book => book.Id));
         }
     }
 }
