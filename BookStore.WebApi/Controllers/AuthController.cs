@@ -68,5 +68,43 @@ namespace BookStore.WebApi.Controllers
 
             return Ok(tokenHandler.WriteToken(token));
         }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserDto userDto)
+        {
+            var user = await userManager.FindByEmailAsync(userDto.Email);
+
+            if (user == null)
+            {
+                return Conflict(nameof(user));
+            }
+
+            var userHasValidPassword = await userManager.CheckPasswordAsync(user, userDto.Password); ;
+
+            if (!userHasValidPassword)
+            {
+                return Conflict(nameof(user));
+            }
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim("id", user.Id)
+                }),
+                Expires = DateTime.UtcNow.AddHours(5),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            return Ok(tokenHandler.WriteToken(token));
+        }
     }
 }

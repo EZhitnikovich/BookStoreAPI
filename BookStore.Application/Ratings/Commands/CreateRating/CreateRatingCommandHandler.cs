@@ -18,7 +18,7 @@ namespace BookStore.Application.Ratings.Commands.CreateRating
         {
             var rating = new Rating
             {
-                UserId = request.UserID,
+                UserId = request.UserId,
                 BookId = request.BookId,
                 Value = request.Value,
                 Id = Guid.NewGuid(),
