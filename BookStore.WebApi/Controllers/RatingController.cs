@@ -18,12 +18,10 @@ namespace BookStore.WebApi.Controllers
     public class RatingController : BaseController
     {
         private readonly IMapper mapper;
-        private readonly UserManager<IdentityUser> userManager;
 
-        public RatingController(IMapper mapper, UserManager<IdentityUser> userManager)
+        public RatingController(IMapper mapper)
         {
             this.mapper = mapper;
-            this.userManager = userManager;
         }
 
         [HttpPost]
