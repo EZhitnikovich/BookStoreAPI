@@ -5,6 +5,7 @@ using BookStore.Application.Books.Commands.UpdateBook;
 using BookStore.Application.Books.Queries.BookDetails;
 using BookStore.Application.Books.Queries.GetBookList;
 using BookStore.WebApi.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.WebApi.Controllers

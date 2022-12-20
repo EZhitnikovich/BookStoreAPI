@@ -2,6 +2,10 @@
 using BookStore.Application.Common.Mapping;
 using BookStore.Application.Interfaces;
 using BookStore.Persistence;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System.Reflection;
 
 namespace BookStore.WebApi
@@ -25,6 +29,20 @@ namespace BookStore.WebApi
 
             services.AddApplication();
             services.AddPersistence(Configuration);
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<BookStoreDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(o =>
+            {
+                o.Password.RequireDigit = false;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric= false;
+                o.Password.RequiredLength = 6;
+            });
+
             services.AddControllers();
 
             services.AddCors(opt =>
@@ -37,12 +55,23 @@ namespace BookStore.WebApi
                 });
             });
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(o =>
+            {
+                o.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+                {
+                    Description = "Standard Authorization header using the Bearer scheme (\"bearer {token}\")",
+                    In = ParameterLocation.Cookie,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.OAuth2
+                });
+
+                o.OperationFilter<SecurityRequirementsOperationFilter>();
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if(env.IsDevelopment())
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -51,6 +80,10 @@ namespace BookStore.WebApi
             app.UseSwaggerUI();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseHttpsRedirection();
             app.UseCors("AllowAll");
 
