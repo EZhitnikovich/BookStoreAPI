@@ -2,7 +2,7 @@
 using BookStore.Application.Common.Mapping;
 using BookStore.Domain;
 
-namespace BookStore.Application.Books.Queries.GetBookListByCategory
+namespace BookStore.Application.Books.Queries.GetBookList
 {
     public class BookLookupByCategoryDto : IMapWith<Book>
     {

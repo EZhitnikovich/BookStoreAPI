@@ -4,7 +4,6 @@ using BookStore.Application.Books.Commands.DeleteBook;
 using BookStore.Application.Books.Commands.UpdateBook;
 using BookStore.Application.Books.Queries.BookDetails;
 using BookStore.Application.Books.Queries.GetBookList;
-using BookStore.Application.Books.Queries.GetBookListByCategory;
 using BookStore.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 

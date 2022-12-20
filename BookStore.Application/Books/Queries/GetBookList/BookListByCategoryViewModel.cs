@@ -1,4 +1,4 @@
-﻿namespace BookStore.Application.Books.Queries.GetBookListByCategory
+﻿namespace BookStore.Application.Books.Queries.GetBookList
 {
     public class BookListByCategoryViewModel
     {
