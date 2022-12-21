@@ -3,6 +3,7 @@ using BookStore.Application.Common.Mapping;
 using BookStore.Application.Interfaces;
 using BookStore.Persistence;
 using BookStore.WebApi.Options;
+using BookStore.WebApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -44,6 +45,8 @@ namespace BookStore.WebApi
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 6;
             });
+
+            services.AddScoped<IAuthService, AuthService>();
 
             services.AddControllers();
 
