@@ -16,6 +16,11 @@ namespace BookStore.Application.Ratings.Commands.CreateRating
 
         public async Task<Guid> Handle(CreateRatingCommand request, CancellationToken cancellationToken)
         {
+            if(context.Ratings.Any(x=>x.UserId == request.UserId && x.BookId == request.BookId))
+            {
+                return Guid.Empty;
+            }
+
             var rating = new Rating
             {
                 UserId = request.UserId,
