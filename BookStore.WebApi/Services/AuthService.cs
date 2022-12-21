@@ -1,6 +1,5 @@
 ﻿using BookStore.WebApi.Models;
 using BookStore.WebApi.Options;
-using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
